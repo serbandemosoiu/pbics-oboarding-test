@@ -1,0 +1,55 @@
+@model OnboardingForm.Models.OnboardingFormModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Onboarding Form</title>
+    <style>
+        form {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        input[type="text"], input[type="email"], input[type="password"], select, textarea {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <h1>Onboarding Form</h1>
+        @Html.ValidationSummary()
+        <label>Name:</label>
+        @Html.TextBoxFor(m => m.Name, new { required = "required" })
+        @Html.ValidationMessageFor(m => m.Name)
+        <label>Email:</label>
+        @Html.TextBoxFor(m => m.Email, new { required = "required", type = "email" })
+        @Html.ValidationMessageFor(m => m.Email)
+        <label>Password:</label>
+        @Html.PasswordFor(m => m.Password, new { required = "required" })
+        @Html.ValidationMessageFor(m => m.Password)
+        <label>Gender:</label>
+        @Html.DropDownListFor(m => m.Gender, new SelectList(new[] {
+            new SelectListItem { Text = "--Select Gender--", Value = "" },
+            new SelectListItem { Text = "Male", Value = "male" },
+            new SelectListItem { Text = "Female", Value = "female" },
+            new SelectListItem { Text = "Other
